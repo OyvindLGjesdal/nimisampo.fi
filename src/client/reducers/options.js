@@ -4,7 +4,7 @@ import {
   UPDATE_MAP_MODE,
 } from '../actions';
 
-const DEFAULT_LANGUAGE = 'fi';
+const DEFAULT_LANGUAGE = 'no';
 const DEFAULT_RESULT_FORMAT = 'table';
 const DEFAULT_MAP_MODE = 'cluster';
 
@@ -32,7 +32,7 @@ export const INITIAL_STATE = {
       modifier: 'Tilpassing',
       base: 'Grunnlag',
       year: 'År',
-      table: 'Tabel',
+      table: 'Tabell',
       clusteredMap: 'Klyngekart',
       markerMap: 'Punktkart',
       heatmap: 'Konsentrasjonskart',
@@ -48,7 +48,7 @@ export const INITIAL_STATE = {
     en: {
       nameSampo: 'Norwegian place-names',
       nameSampoDesc1: `Search, analyse and visualise place-name data.`,
-      nameSampoDesc2: `To start a search, select the desired place-naem theme from the menu and enter a place name. Alternatively, you can retrieve all place names from the map area.`,
+      nameSampoDesc2: `To start a search, select the desired place-name theme from the menu and enter a place name. Alternatively, you can retrieve all place names from the map area.`,
       nameSampoDesc3: `Use wildcards (*) to search for part of a place name. For example, a search for "Strand*" will find all the names beginning with 'Strand-' and "*tjønn" all names ending in '-tjønn'.`,
       nameSampoDesc4: `Searching can also be combined with the word 'or'. For example, "*tjønn or *tjern*" will find any name ending in '-tjønn' or '-tjern'.`,
       selectDataSources: 'Select place-name theme',

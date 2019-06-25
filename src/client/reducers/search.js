@@ -11,6 +11,15 @@ import {
 export const INITIAL_STATE = {
   query: '',
   datasets: {
+    bustadnamn: {
+      titleEn: 'Bustadnamnregisteret',
+      titleFi: 'Bustadnamnregisteret',
+      shortTitle: 'BSN',
+      timePeriod: '1950s',
+      link: 'https://nimiarkisto.fi/wiki/Nimiarkisto:Tietoja',
+      selected: true
+    }
+    ,
     kotus: {
       titleEn: 'Names Archive of the Institute for the Languages of Finland',
       titleFi: 'Kotimaisten kielten keskuksen Nimiarkisto (NA)',

@@ -1,9 +1,9 @@
 module.exports = {
-  'warsa_karelian_places': {
-    'title': 'Karelian map names',
-    'shortTitle': 'KK',
-    'timePeriod': '1922-1944',
-    'endpoint': 'http://ldf.fi/warsa/sparql',
+  'bustadnamn': {
+    'title': 'Bustadnamnregisteret',
+    'shortTitle': 'BSN',
+    'timePeriod': '1950-54',
+    'endpoint': 'http://158.39.48.37/stedsnavn-data/query',
     // 'suggestionQuery': `
     //   PREFIX text: <http://jena.apache.org/text#>
     //   PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
@@ -23,52 +23,64 @@ module.exports = {
     //   LIMIT 50
     //   `,
     'simpleSuggestionQuery': `
-        PREFIX text: <http://jena.apache.org/text#>
-        PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
-        PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
-        PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
-        PREFIX gs: <http://www.opengis.net/ont/geosparql#>
-        SELECT DISTINCT ?label
-        WHERE {
-          GRAPH <http://ldf.fi/warsa/places/karelian_places> {
-            ?id text:query (skos:prefLabel '<QUERYTERM>*' 50) .
-          }
-          ?id skos:prefLabel ?lbl .
-          FILTER(STRSTARTS(LCASE(?lbl), '<QUERYTERM>'))
-          BIND(STR(?lbl) AS ?label)
+    PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+    PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+    prEFIX text: <http://jena.apache.org/text#>
+    PREFIX ecrm: <http://erlangen-crm.org/current/>
+    
+    SELECT distinct ?id
+    WHERE {
+      GRAPH <http://data.stadnamn.uib.no/stedsnavn/bustadnamnregisteret>
+      {  
+        ?id text:query ("<QUERYTERM>" 4) ;
+        a ecrm:E53_Place .  
         }
+      }       
         `,
     'resultQuery': `
-      PREFIX text: <http://jena.apache.org/text#>
-      PREFIX spatial: <http://jena.apache.org/spatial#>
-      PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
-      PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
-      PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
-      PREFIX gs: <http://www.opengis.net/ont/geosparql#>
-      PREFIX wgs84: <http://www.w3.org/2003/01/geo/wgs84_pos#>
-      SELECT ?id ?prefLabel ?broaderTypeLabel ?broaderAreaLabel ?source ?lat ?long ?markerColor
-      WHERE {
-        {
-          SELECT DISTINCT ?id {
-            GRAPH <http://ldf.fi/warsa/places/karelian_places> {
-              <QUERY>
-            }
-          }
-        }
-        ?id skos:prefLabel ?prefLabel .
-        ?id a/skos:prefLabel ?broaderTypeLabel .
-        ?id gs:sfWithin/skos:prefLabel ?broaderAreaLabel .
-        BIND("KK" AS ?source)
-        BIND("blue" AS ?markerColor)
+    PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+    PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+    PREFIX text: <http://jena.apache.org/text#>
+    PREFIX ecrm: <http://erlangen-crm.org/current/>
+    PREFIX skosxl: <http://www.w3.org/2008/05/skos-xl#>
+    PREFIX dct: <http://purl.org/dc/terms/>
+    PREFIX wgs84: <http://www.w3.org/2003/01/geo/wgs84_pos#>
+    
+    SELECT distinct ?id ?stedsObjektNavn ?prefLabel ?kommune_uri ?fylke_uri ?fylke_label ?kommune_label ?source ?markerColor
+    WHERE {
+      GRAPH <http://data.stadnamn.uib.no/stedsnavn/bustadnamnregisteret>
+      {  
+        ?id text:query ("<QUERYTERM>" 10000).
+        ?id rdfs:label ?prefLabel ;
+        a ecrm:E53_Place ;
+        ecrm:P10_falls_within* ?fylke_uri;
+        ecrm:P10_falls_within* ?kommune_uri;
+        ecrm:P2_has_type ?type.
+        BIND ("BSN" AS ?source)  
+        BIND ("blue" AS  ?markerColor)
         OPTIONAL {
           ?id wgs84:lat ?lat .
           ?id wgs84:long ?long .
         }
-        #FILTER(LCASE(STR(?prefLabel))='<QUERYTERM>')
-        FILTER(LANGMATCHES(LANG(?prefLabel), 'fi'))
-        FILTER(LANGMATCHES(LANG(?broaderTypeLabel), 'fi'))
-        FILTER(LANGMATCHES(LANG(?broaderAreaLabel), 'fi'))
-      }
+        FILTER ( NOT EXISTS {?id ecrm:P10_contains ?contains.})
+        { SELECT distinct ?fylke_uri ?fylke_label ?kommune_uri ?kommune_label WHERE {
+          ?fylke_uri ecrm:P2_has_type ?vokab_fylke;      
+          rdfs:label ?fylke_label.
+          ?kommune_uri ecrm:P2_has_type ?vokab_kommune;
+          rdfs:label ?kommune_label.
+          SERVICE <http://data.toponym.ub.uib.no/stedsnavn-vocab> {
+            GRAPH <http://data.stadnamn.uib.no/skos/navneliste> {
+              ?type dct:identifier ?stedsObjektNavn . 
+              ?vokab_fylke dct:identifier "fylke".
+              ?vokab_kommune dct:identifier "kommune". 
+              ?type dct:identifier ?identifier.
+              }
+            }
+          }
+        }
+      }   
+    }
+    
       `,
   },
   'pnr': {
