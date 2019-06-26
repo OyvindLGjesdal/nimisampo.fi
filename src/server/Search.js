@@ -8,7 +8,7 @@ import {
 const getResults = async (queryTerm, latMin, longMin, latMax, longMax, datasetId) => {
   const { endpoint, resultQuery } = datasetConfig[datasetId];
   let query = '';
-  if (datasetId != 'tgn') {
+  if (datasetId != 'tgn' && datasetId !='bustadnamn') {
     if (queryTerm !== '') {
       query = resultQuery.replace('<QUERY>', `?id text:query (skos:prefLabel '${queryTerm.toLowerCase()}' 100000) .`);
     } else if (latMin != 0) {

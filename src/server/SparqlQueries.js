@@ -45,42 +45,43 @@ module.exports = {
     PREFIX skosxl: <http://www.w3.org/2008/05/skos-xl#>
     PREFIX dct: <http://purl.org/dc/terms/>
     PREFIX wgs84: <http://www.w3.org/2003/01/geo/wgs84_pos#>
-    
-    SELECT distinct ?id ?stedsObjektNavn ?prefLabel ?kommune_uri ?fylke_uri ?fylke_label ?kommune_label ?source ?markerColor
+        
+    SELECT distinct ?id (?identifier as ?typeLabel) ?prefLabel ?kommune_uri ?fylke_uri ?fylke_label ?kommune_label ?source ?markerColor ?type_uri ?lat ?long 
     WHERE {
-      GRAPH <http://data.stadnamn.uib.no/stedsnavn/bustadnamnregisteret>
-      {  
-        ?id text:query ("<QUERYTERM>" 10000).
-        ?id rdfs:label ?prefLabel ;
-        a ecrm:E53_Place ;
-        ecrm:P10_falls_within* ?fylke_uri;
-        ecrm:P10_falls_within* ?kommune_uri;
-        ecrm:P2_has_type ?type.
+      SERVICE <http://data.toponym.ub.uib.no/stedsnavn-vocab> {
+        GRAPH <http://data.stadnamn.uib.no/skos/navneliste> {
+          ?type_uri dct:identifier ?identifier.
+          VALUES (?identifier) {("bruk") ("gard")}.
+          ?vokab_fylke dct:identifier "fylke".
+          ?vokab_kommune dct:identifier "kommune". 
+          }
+        }
+        GRAPH <http://data.stadnamn.uib.no/stedsnavn/bustadnamnregisteret>
+        {
+          {
+            SELECT ?id ?prefLabel WHERE {
+              ?id text:query ("<QUERYTERM>" 10000).
+              ?id rdfs:label ?prefLabel ;
+              a ecrm:E53_Place .
+              FILTER ( NOT EXISTS {?id ecrm:P10_contains ?contains.} )
+              }
+          }
+        ?id ecrm:P10_falls_within* ?fylke_uri;
+        ecrm:P10_falls_within* ?kommune_uri.
+        ?id ecrm:P2_has_type ?type_uri.
         BIND ("BSN" AS ?source)  
         BIND ("blue" AS  ?markerColor)
         OPTIONAL {
-          ?id wgs84:lat ?lat .
-          ?id wgs84:long ?long .
+          ?id wgs84:lat ?lat.
+          ?id wgs84:long ?long.
         }
-        FILTER ( NOT EXISTS {?id ecrm:P10_contains ?contains.})
-        { SELECT distinct ?fylke_uri ?fylke_label ?kommune_uri ?kommune_label WHERE {
-          ?fylke_uri ecrm:P2_has_type ?vokab_fylke;      
-          rdfs:label ?fylke_label.
-          ?kommune_uri ecrm:P2_has_type ?vokab_kommune;
-          rdfs:label ?kommune_label.
-          SERVICE <http://data.toponym.ub.uib.no/stedsnavn-vocab> {
-            GRAPH <http://data.stadnamn.uib.no/skos/navneliste> {
-              ?type dct:identifier ?stedsObjektNavn . 
-              ?vokab_fylke dct:identifier "fylke".
-              ?vokab_kommune dct:identifier "kommune". 
-              ?type dct:identifier ?identifier.
-              }
-            }
-          }
-        }
-      }   
+        ?fylke_uri ecrm:P2_has_type ?vokab_fylke;      
+        rdfs:label ?fylke_label.
+        ?kommune_uri ecrm:P2_has_type ?vokab_kommune;
+        rdfs:label ?kommune_label.
+      }
     }
-    
+
       `,
   },
   'pnr': {
