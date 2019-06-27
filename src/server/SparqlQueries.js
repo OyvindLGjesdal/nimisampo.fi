@@ -27,13 +27,15 @@ module.exports = {
     PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
     prEFIX text: <http://jena.apache.org/text#>
     PREFIX ecrm: <http://erlangen-crm.org/current/>
+    PREFIX spatial: <http://jena.apache.org/spatial#>
+
     
     SELECT distinct ?id
     WHERE {
       GRAPH <http://data.stadnamn.uib.no/stedsnavn/bustadnamnregisteret>
       {  
-        ?id text:query ("<QUERYTERM>" 4) ;
-        a ecrm:E53_Place .  
+        <QUERY> 
+        ?id a ecrm:E53_Place .  
         }
       }       
         `,
@@ -45,6 +47,7 @@ module.exports = {
     PREFIX skosxl: <http://www.w3.org/2008/05/skos-xl#>
     PREFIX dct: <http://purl.org/dc/terms/>
     PREFIX wgs84: <http://www.w3.org/2003/01/geo/wgs84_pos#>
+    PREFIX spatial: <http://jena.apache.org/spatial#>
         
     SELECT distinct ?id (?identifier as ?typeLabel) ?prefLabel ?kommune_uri ?fylke_uri ?fylke_label ?kommune_label ?source ?markerColor ?type_uri ?lat ?long 
     WHERE {
@@ -60,7 +63,7 @@ module.exports = {
         {
           {
             SELECT ?id ?prefLabel WHERE {
-              ?id text:query ("<QUERYTERM>" 10000).
+              <QUERY>
               ?id rdfs:label ?prefLabel ;
               a ecrm:E53_Place .
               FILTER ( NOT EXISTS {?id ecrm:P10_contains ?contains.} )
