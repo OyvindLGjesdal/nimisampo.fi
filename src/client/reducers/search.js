@@ -14,8 +14,8 @@ export const INITIAL_STATE = {
     bustadnamn: {
       titleEn: 'Bustadnamnregisteret',
       titleFi: 'Bustadnamnregisteret',
-      shortTitle: 'BSN',
-      timePeriod: '1950s',
+      shortTitle: 'BNR',
+      timePeriod: '1950-1970',
       link: 'https://nimiarkisto.fi/wiki/Nimiarkisto:Tietoja',
       selected: true
     }
