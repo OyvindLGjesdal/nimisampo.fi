@@ -1,7 +1,7 @@
 module.exports = {
   'bustadnamn': {
     'title': 'Bustadnamnregisteret',
-    'shortTitle': 'BSN',
+    'shortTitle': 'BNR',
     'timePeriod': '1950-54',
     'endpoint': 'http://158.39.48.37/stedsnavn-data/query',
     // 'suggestionQuery': `
@@ -49,7 +49,7 @@ module.exports = {
     PREFIX wgs84: <http://www.w3.org/2003/01/geo/wgs84_pos#>
     PREFIX spatial: <http://jena.apache.org/spatial#>
         
-    SELECT distinct ?id (?identifier as ?typeLabel) ?prefLabel ?kommune_uri ?fylke_uri ?fylke_label ?kommune_label ?source ?markerColor ?type_uri ?lat ?long 
+    SELECT distinct ?id (?identifier as ?typeLabel) ?prefLabel ?kommune_uri ?fylke_uri ?broaderAreaLabel ?source ?markerColor ?type_uri ?lat ?long 
     WHERE {
       SERVICE <http://data.toponym.ub.uib.no/stedsnavn-vocab> {
         GRAPH <http://data.stadnamn.uib.no/skos/navneliste> {
@@ -72,7 +72,7 @@ module.exports = {
         ?id ecrm:P10_falls_within* ?fylke_uri;
         ecrm:P10_falls_within* ?kommune_uri.
         ?id ecrm:P2_has_type ?type_uri.
-        BIND ("BSN" AS ?source)  
+        BIND ("BNR" AS ?source)  
         BIND ("blue" AS  ?markerColor)
         OPTIONAL {
           ?id wgs84:lat ?lat.
@@ -82,6 +82,8 @@ module.exports = {
         rdfs:label ?fylke_label.
         ?kommune_uri ecrm:P2_has_type ?vokab_kommune;
         rdfs:label ?kommune_label.
+        BIND (CONCAT(?kommune_label, ", ",?fylke_label) AS ?broaderAreaLabel)
+
       }
     }
 
