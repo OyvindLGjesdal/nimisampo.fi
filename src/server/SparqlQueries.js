@@ -34,7 +34,7 @@ module.exports = {
     WHERE {
       GRAPH <http://data.stadnamn.uib.no/stedsnavn/bustadnamnregisteret>
       {  
-        <QUERY> 
+        <:> 
         ?id a ecrm:E53_Place .  
         }
       }       
@@ -49,7 +49,7 @@ module.exports = {
     PREFIX wgs84: <http://www.w3.org/2003/01/geo/wgs84_pos#>
     PREFIX spatial: <http://jena.apache.org/spatial#>
         
-    SELECT distinct ?id (?identifier as ?typeLabel) ?prefLabel ?kommune_uri ?fylke_uri ?broaderAreaLabel ?source ?markerColor ?type_uri ?lat ?long 
+    SELECT distinct ?id (?identifier as ?broaderTypeLabel) ?prefLabel ?kommune_uri ?fylke_uri ?broaderAreaLabel ?source ?markerColor ?type_uri ?lat ?long 
     WHERE {
       SERVICE <http://data.toponym.ub.uib.no/stedsnavn-vocab> {
         GRAPH <http://data.stadnamn.uib.no/skos/navneliste> {

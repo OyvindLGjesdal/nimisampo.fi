@@ -93,7 +93,7 @@ const Footer = props => {
       
        <a
         className={classes.link}
-        href="https://spraaksamlingene.no"
+        href="https://spraksamlingene.no"
         target='_blank'
         rel='noopener noreferrer'
       >

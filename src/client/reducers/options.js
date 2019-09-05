@@ -33,7 +33,7 @@ export const INITIAL_STATE = {
       type: 'Type',
       area: 'Område',
       modifier: 'Tilpassing',
-      base: 'Grunnlag',
+      base: 'Lokalitetstype',
       year: 'År',
       table: 'Tabell',
       clusteredMap: 'Klyngekart',
