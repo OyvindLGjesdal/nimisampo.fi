@@ -6,7 +6,7 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Button from '@material-ui/core/Button';
 import { Link } from 'react-router-dom';
 import FeedbackDialog from './FeedbackDialog';
-import namesampoLogoEn from '../../img/logos/namesampo.png';
+import namesampoLogoEn from '../../img/logos/norske-stadnamn.png';
 import namesampoLogoFi from '../../img/logos/nimisampo-logo.png';
 
 const styles = () => ({

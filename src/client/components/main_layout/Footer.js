@@ -2,6 +2,7 @@ import React from 'react';
 import Paper from '@material-ui/core/Paper';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
+import uibSpraakLogo from '../../img/logos/spraak-uib.png' ;
 import aaltoLogo from '../../img/logos/aalto-logo-white-no-background-small.png';
 import uhLogo from '../../img/logos/university-of-helsinki-logo-white-no-background-small.png';
 import heldigLogo from '../../img/logos/heldig-logo-small.png';
@@ -13,6 +14,7 @@ const uhLogoHeight = 44;
 const secoLogoHeight = 48;
 const heldigLogoHeight = 44;
 const kotusLogoHeight = 44;
+const uibLogoHeight= 44;
 
 const styles = theme => ({
   root: {
@@ -63,6 +65,13 @@ const styles = theme => ({
       height: kotusLogoHeight - 15
     },
   },
+  uibSpraakLogo: {
+    paddingLeft: 44,
+    height: uibLogoHeight,
+    [theme.breakpoints.down('md')]: {
+      height: uibLogoHeight - 15
+    },
+  },
   link: {
     textDecoration: 'none'
   },
@@ -75,47 +84,20 @@ const Footer = props => {
 
       <a
         className={classes.link}
-        href="https://www.aalto.fi/"
-        target='_blank'
-        rel='noopener noreferrer'
-      >
-        <img className={classes.aaltoLogo} src={aaltoLogo} alt='Aalto University logo'/>
-      </a>
-
-      <a
-        className={classes.link}
-        href="https://www.helsinki.fi/"
-        target='_blank'
-        rel='noopener noreferrer'
-      >
-        <img className={classes.uhLogo} src={uhLogo} alt='University of Helsinki logo'/>
-      </a>
-
-      <a
-        className={classes.link}
-        href="http://www.heldig.fi/"
-        target='_blank'
-        rel='noopener noreferrer'
-      >
-        <img className={classes.heldigLogo} src={heldigLogo} alt='HELDIG logo'/>
-      </a>
-
-      <a
-        className={classes.link}
         href="https://seco.cs.aalto.fi/"
         target='_blank'
         rel='noopener noreferrer'
       >
         <img className={classes.secoLogo} src={secoLogo} alt='SeCo logo'/>
       </a>
-
-      <a
+      
+       <a
         className={classes.link}
-        href="https://www.kotus.fi/"
+        href="https://spraaksamlingene.no"
         target='_blank'
         rel='noopener noreferrer'
       >
-        <img className={classes.kotusLogo} src={kotusLogo} alt='Kotus logo'/>
+        <img className={classes.uibSpraakLogo} src={uibSpraakLogo} alt='University of Bergen, Language Collections'/>
       </a>
 
     </Paper>
