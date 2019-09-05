@@ -20,7 +20,7 @@ export const INITIAL_STATE = {
   longMin: 0,
   latMax: 0,
   longMax: 0,
-  zoomLevel: 4
+  zoomLevel: 5
 };
 
 const map = (state = INITIAL_STATE, action) => {

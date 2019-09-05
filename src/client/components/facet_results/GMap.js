@@ -4,8 +4,8 @@ import HeatmapLayer from 'react-google-maps/lib/components/visualization/Heatmap
 
 let GMap = withGoogleMap((props) =>
   <GoogleMap
-    defaultZoom={4}
-    defaultCenter={{ lat: 65.184809, lng: 27.31405 }}
+    defaultZoom={5}
+    defaultCenter={{ lat: 65.21, lng: 12.4917 }}
   >
     <HeatmapLayer data={
       props.results.reduce((data, obj) => {
