@@ -14,7 +14,7 @@ import Footer from '../components/main_layout/Footer';
 import FacetBar from '../components/facet_bar/FacetBar';
 import Places from '../components/perspectives/Places';
 import Message from '../components/main_layout/Message';
-import bgImage from '../img/bg2.jpg';
+import bgImage from '../img/bg3.jpg';
 
 import {
   filterResults
