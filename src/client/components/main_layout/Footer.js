@@ -8,13 +8,14 @@ import uhLogo from '../../img/logos/university-of-helsinki-logo-white-no-backgro
 import heldigLogo from '../../img/logos/heldig-logo-small.png';
 import kotusLogo from '../../img/logos/kotus-logo-white-no-backgrounds-small.png';
 import secoLogo from '../../img/logos/seco-logo-white-no-background-small.png';
-
+import KVLogo from '../../img/logos/kartverket.png';
 const aaltoLogoHeight = 37;
 const uhLogoHeight = 44;
 const secoLogoHeight = 48;
 const heldigLogoHeight = 44;
 const kotusLogoHeight = 44;
-const uibLogoHeight= 44;
+const uibLogoHeight = 44;
+const KVLogoHeight = 44;
 
 const styles = theme => ({
   root: {
@@ -72,6 +73,13 @@ const styles = theme => ({
       height: uibLogoHeight - 15
     },
   },
+  KVLogo: {
+    paddingLeft: 44,
+    height: KVLogoHeight,
+    [theme.breakpoints.down('md')]: {
+      height: KVLogoHeight - 15
+    },
+  },
   link: {
     textDecoration: 'none'
   },
@@ -81,6 +89,22 @@ const Footer = props => {
   const { classes } = props;
   return (
     <Paper className={classes.root}>
+      <a
+        className={classes.link}
+        href="https://www.uib.no/ub/101277/norsk-kulturarv-i-skrift-og-tale"
+        target='_blank'
+        rel='noopener noreferrer'
+      >
+        <img className={classes.uibSpraakLogo} src={uibSpraakLogo} alt='University of Bergen, Language Collections'/>
+      </a>
+      <a
+        className={classes.link}
+        href="https://kartverket.no/"
+        target='_blank'
+        rel='noopener noreferrer'
+      >
+        <img className={classes.KVLogo} src={KVLogo} alt='Kartverket logo'/>
+      </a>
 
       <a
         className={classes.link}
@@ -91,15 +115,6 @@ const Footer = props => {
         <img className={classes.secoLogo} src={secoLogo} alt='SeCo logo'/>
       </a>
       
-       <a
-        className={classes.link}
-        href="https://spraksamlingene.no"
-        target='_blank'
-        rel='noopener noreferrer'
-      >
-        <img className={classes.uibSpraakLogo} src={uibSpraakLogo} alt='University of Bergen, Language Collections'/>
-      </a>
-
     </Paper>
   );
 };
