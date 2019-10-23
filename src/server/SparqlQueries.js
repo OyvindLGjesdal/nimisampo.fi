@@ -3,7 +3,7 @@ module.exports = {
     'title': 'Bustadnamnregisteret',
     'shortTitle': 'BNR',
     'timePeriod': '1950-54',
-    'endpoint': 'http://158.39.48.37/stedsnavn-data/query',
+    'endpoint': 'http://158.39.48.37:3030/stedsnavn-data/query',
     // 'suggestionQuery': `
     //   PREFIX text: <http://jena.apache.org/text#>
     //   PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
