@@ -84,7 +84,7 @@ let Places = props => {
         render={() =>
           <GMap
             results={props.results}
-            googleMapURL="https://maps.googleapis.com/maps/api/js?key=AIzaSyDGnx-oaFWaUPDElYDwNWVUeA8G4uLCKo0&v=3.exp&libraries=geometry,drawing,places,visualization"
+            googleMapURL="https://maps.googleapis.com/maps/api/js?key=AIzaSyAwkjooQWS_hdtOHakBmruAhTYPU-rSWvY&v=3.exp&libraries=geometry,drawing,places,visualization"
             loadingElement={<div style={{ height: `100%` }} />}
             containerElement={<div style={{ height: `calc(100% - 72px` }} />}
             mapElement={<div style={{ height: `100%` }} />}
