@@ -51,7 +51,7 @@ module.exports = {
         
     SELECT distinct ?id (?identifier as ?broaderTypeLabel) ?prefLabel ?kommune_uri ?fylke_uri ?broaderAreaLabel ?source ?markerColor ?type_uri ?lat ?long 
     WHERE {
-      SERVICE <http://158.39.48.37/stedsnavn-vocab> {
+      SERVICE <http://158.39.48.37:3030/stedsnavn-vocab> {
         GRAPH <http://data.stadnamn.uib.no/skos/navneliste> {
           ?type_uri dct:identifier ?identifier.
           VALUES (?identifier) {("bruk") ("gard")}.
