@@ -50,13 +50,13 @@ class TopBar extends React.Component {
               to='/'
               onClick={() => this.props.clearResults()}
             >
-              <img className={classes.namesampoLogo} src={this.props.language == 'fi' ? namesampoLogoFi : namesampoLogoEn} alt='NameSampo logo'/>
+              <img className={classes.namesampoLogo} src={this.props.language == 'fi' ? namesampoLogoFi : namesampoLogoEn} alt='Stadnamn/Stedsnavn logo'/>
             </Button>
             <div className={classes.grow} />
             <div className={classes.sectionDesktop}>
               <a
                 className={classes.link}
-                href="https://seco.cs.aalto.fi/projects/nimisampo/"
+                href="https://storymaps.arcgis.com/stories/629caa0a70f149609abdac6397864c5d"
                 target='_blank'
                 rel='noopener noreferrer'
               >
