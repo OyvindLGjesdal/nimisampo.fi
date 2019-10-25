@@ -103,7 +103,7 @@ class FeedbackDialog extends React.Component {
             <div className={classes.iframeContainer}>
               <iframe
                 className={classes.iframe}
-                src="https://link.webropolsurveys.com/S/3BA01B62823131EF"
+                src="https://skjemaker.app.uib.no/view.php?id=7434967"
                 onLoad={this.hideSpinner}
               />
             </div>
