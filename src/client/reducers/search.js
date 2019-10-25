@@ -16,7 +16,7 @@ export const INITIAL_STATE = {
       titleFi: 'Bustadnamnregisteret',
       shortTitle: 'BNR',
       timePeriod: '1950-1970',
-      link: 'https://nimiarkisto.fi/wiki/Nimiarkisto:Tietoja',
+      link: 'https://storymaps.arcgis.com/stories/563e56e4d3604a299626c8e3993d2332',
       selected: true
     }
   },
