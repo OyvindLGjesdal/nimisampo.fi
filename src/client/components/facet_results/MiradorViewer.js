@@ -51,7 +51,7 @@ const styles = () => ({
 
 });
 
-class MiradorViewer extends React.Component {
+class viewerContainer extends React.Component {
   state = {
     open: false,
     zoomMessage: '',
@@ -115,9 +115,9 @@ class MiradorViewer extends React.Component {
   }
 }
 
-MiradorViewer.propTypes = {
+FeedbackDialog.propTypes = {
   classes: PropTypes.object.isRequired,
   strings: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(MiradorViewer);
+export default withStyles(styles)(FeedbackDialog);
