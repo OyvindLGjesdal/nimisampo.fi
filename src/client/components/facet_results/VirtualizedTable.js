@@ -5,6 +5,7 @@ import { withStyles } from '@material-ui/core/styles';
 // import ResultFilterDialogSingle from './ResultFilterDialogSingle';
 import IconButton from '@material-ui/core/IconButton';
 import PlaceIcon from '@material-ui/icons/Place';
+import MiradorViewer from './MiradorViewer';
 import { has } from 'lodash';
 import {
   AutoSizer,
@@ -102,7 +103,14 @@ class VirtualizedTable extends React.PureComponent {
       }
       return children;
     };
-
+    
+    const iiifRenderer = ({cellData,rowData}) => {
+    return (
+       <div key={rowData.id}>
+      <MiradorViewer manifest="https://ubbdst.github.io/viewer/viewer.html?manifest=https://iiif.spraksamlingane.no/iiif/manifest/0003aaa3-6fad-3729-ac46-fc454499c2c9.json" />
+      </div>
+    );
+    };
     const labelRenderer = ({cellData, rowData}) => {
       if (cellData == null) return '';
       const label = <a target='_blank' rel='noopener noreferrer' href={rowData.id}>{cellData}</a>;
@@ -241,6 +249,15 @@ class VirtualizedTable extends React.PureComponent {
                     cellRenderer={sourceRenderer}
                     width={columnWidth}
                   />
+
+                  <Column
+                   label='iiif'
+                   cellDataGetter=""
+                   datakey="iiif"
+                   headerRenderer={headerRenderer}
+                   cellRenderer={iiifRenderer}
+                   width={columnWidth}
+                   />
                 </Table>
               )}
             </AutoSizer>
