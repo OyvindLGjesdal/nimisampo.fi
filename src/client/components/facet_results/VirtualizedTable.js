@@ -252,8 +252,8 @@ class VirtualizedTable extends React.PureComponent {
 
                   <Column
                    label='iiif'
-                   cellDataGetter=""
-                   datakey="iiif"
+                   cellDataGetter={({rowData}) => "test"}
+                   datakey="manifest"
                    headerRenderer={headerRenderer}
                    cellRenderer={iiifRenderer}
                    width={columnWidth}
