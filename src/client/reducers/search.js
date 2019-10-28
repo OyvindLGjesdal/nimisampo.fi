@@ -18,6 +18,14 @@ export const INITIAL_STATE = {
       timePeriod: '1950-1970',
       link: 'https://storymaps.arcgis.com/stories/563e56e4d3604a299626c8e3993d2332',
       selected: true
+    },
+    tgn: {
+      titleEn: 'The Getty Thesaurus of Geographic Names (TGN)',
+      titleFi: 'The Getty Thesaurus of Geographic Names (TGN)',
+      shortTitle: 'TGN',
+      timePeriod: '?',
+      link: 'http://www.getty.edu/research/tools/vocabularies/tgn/about.html',
+      selected: false
     }
   },
   results: null,
