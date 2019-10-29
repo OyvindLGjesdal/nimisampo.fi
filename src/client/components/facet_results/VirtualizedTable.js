@@ -111,7 +111,7 @@ class VirtualizedTable extends React.PureComponent {
       <MiradorViewer strings={this.props.strings} manifest={rowData.manifest} />
       </div>
     )};
-    };
+    ;
     const labelRenderer = ({cellData, rowData}) => {
       if (cellData == null) return '';
       const label = <a target='_blank' rel='noopener noreferrer' href={rowData.id}>{cellData}</a>;
