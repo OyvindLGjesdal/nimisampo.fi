@@ -105,7 +105,7 @@ class VirtualizedTable extends React.PureComponent {
     };
     
     const iiifRenderer = ({cellData,rowData}) => {
-    if (cellData == null || rowData.manifest ==  ''){  return ''};
+    if (cellData == null || rowData.manifest ==  undefined) ;  return ''};
       {return (
        <div key={rowData.id}>
       <MiradorViewer strings={this.props.strings} manifest={rowData.manifest} />
