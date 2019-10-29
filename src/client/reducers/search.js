@@ -12,8 +12,8 @@ export const INITIAL_STATE = {
   query: '',
   datasets: {
     bustadnamn: {
-      titleEn: 'Bustadnamnregisteret',
-      titleFi: 'Bustadnamnregisteret',
+      titleEn: 'Bustadnamnregisteret (BNR)',
+      titleFi: 'Bustadnamnregisteret (BNR)',
       shortTitle: 'BNR',
       timePeriod: '1950-1970',
       link: 'https://storymaps.arcgis.com/stories/563e56e4d3604a299626c8e3993d2332',
@@ -42,6 +42,7 @@ export const INITIAL_STATE = {
     broaderAreaLabel: new Set(),
     collector: new Set(),
     collectionYear: new Set(),
+    manifest: new Set(),
     source: new Set(),
   },
   sortBy: 'broaderAreaLabel',
@@ -89,6 +90,7 @@ const search = (state = INITIAL_STATE, action) => {
           broaderAreaLabel: new Set(),
           collector: new Set(),
           collectionYear: new Set(),
+          manifest: new Set(),
           source: new Set(),
         },
       };

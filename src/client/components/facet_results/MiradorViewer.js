@@ -5,6 +5,8 @@ import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
 import DialogContent from '@material-ui/core/DialogContent';
 import CircularProgress from '@material-ui/core/CircularProgress';
+import iiifLogo from '../../img/logos//logo-iiif-34x30.png';
+
 
 const styles = () => ({
   viewerContainer: {
@@ -15,8 +17,8 @@ const styles = () => ({
     height: '100%',
     width: '100%',
     minWidth: 600,
-    maxWidth: 750,
-    maxHeight: 700,
+    maxWidth: 1800,
+    maxHeight: 2000,
     padding: '0px !important'
   },
   dialogContent: {
@@ -81,8 +83,7 @@ class MiradorViewer extends React.Component {
           className={classes.appBarButton}
           classes={{ label: classes.buttonLabel }}
           onClick={this.handleClickOpen}
-        >
-          {strings.mirador}
+        ><img src={iiifLogo} alt="IIIF logo" />       
         </Button>
         <Dialog
           classes={{
@@ -103,7 +104,7 @@ class MiradorViewer extends React.Component {
             <div className={classes.iframeContainer}>
               <iframe
                 className={classes.iframe}
-                src={props.manifest}
+                src={'https://ubbdst.github.io/viewer/viewer.html?manifest=' + this.props.manifest}
                 onLoad={this.hideSpinner}
               />
             </div>

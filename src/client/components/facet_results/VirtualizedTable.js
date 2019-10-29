@@ -105,11 +105,12 @@ class VirtualizedTable extends React.PureComponent {
     };
     
     const iiifRenderer = ({cellData,rowData}) => {
-    return (
+    if (cellData == null || rowData.manifest ==  ''){  return ''};
+      {return (
        <div key={rowData.id}>
-      <MiradorViewer manifest="https://ubbdst.github.io/viewer/viewer.html?manifest=https://iiif.spraksamlingane.no/iiif/manifest/0003aaa3-6fad-3729-ac46-fc454499c2c9.json" />
+      <MiradorViewer strings={this.props.strings} manifest={rowData.manifest} />
       </div>
-    );
+    )};
     };
     const labelRenderer = ({cellData, rowData}) => {
       if (cellData == null) return '';
@@ -251,9 +252,9 @@ class VirtualizedTable extends React.PureComponent {
                   />
 
                   <Column
-                   label='iiif'
-                   cellDataGetter={({rowData}) => "test"}
-                   datakey="manifest"
+                   label={strings.fieldNote}
+                   cellDataGetter={({rowData}) => has(rowData,'manifest') ? rowData.manifest : ''}
+                   dataKey="manifest"
                    headerRenderer={headerRenderer}
                    cellRenderer={iiifRenderer}
                    width={columnWidth}

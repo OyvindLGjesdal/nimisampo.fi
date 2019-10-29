@@ -49,7 +49,7 @@ module.exports = {
     PREFIX wgs84: <http://www.w3.org/2003/01/geo/wgs84_pos#>
     PREFIX spatial: <http://jena.apache.org/spatial#>
         
-    SELECT distinct ?id (?identifier as ?broaderTypeLabel) ?prefLabel ?kommune_uri ?fylke_uri ?broaderAreaLabel ?source ?markerColor ?type_uri ?lat ?long 
+    SELECT distinct ?id (?identifier as ?broaderTypeLabel) ?prefLabel ?kommune_uri ?fylke_uri ?broaderAreaLabel ?source ?markerColor ?type_uri ?lat ?long ?manifest 
     WHERE {
       SERVICE <http://158.39.48.37:3030/stedsnavn-vocab> {
         GRAPH <http://data.stadnamn.uib.no/skos/navneliste> {
@@ -69,6 +69,12 @@ module.exports = {
               FILTER ( NOT EXISTS {?id ecrm:P10_contains ?contains.} )
               }
           }
+          OPTIONAL {   ?id ecrm:P131_is_identified_by ?Note.
+            ?Note <http://erlangen-crm.org/current/P2_has_type> <http://vocab.getty.edu/page/aat/300027201> .
+            ?Note ecrm:P129i_is_subject_of ?manifest.
+            ?manifest dct:conformsTo "http://iiif.io/api/presentation".
+            }
+            
         ?id ecrm:P10_falls_within* ?fylke_uri;
         ecrm:P10_falls_within* ?kommune_uri.
         ?id ecrm:P2_has_type ?type_uri.
@@ -119,7 +125,7 @@ module.exports = {
       PREFIX sf: <http://ldf.fi/functions#>
       PREFIX wgs84: <http://www.w3.org/2003/01/geo/wgs84_pos#>
       PREFIX crm: <http://www.cidoc-crm.org/cidoc-crm/>
-      SELECT ?id ?prefLabel ?broaderTypeLabel ?broaderAreaLabel ?source ?lat ?long ?markerColor
+      SELECT ?id ?prefLabel ?broaderTypeLabel ?broaderAreaLabel ?source ?lat ?long ?markerColor ?manifest
       WHERE {
         <QUERY>
         ?id sf:preferredLanguageLiteral (skos:prefLabel 'fi' '' ?prefLabel) .
@@ -133,6 +139,11 @@ module.exports = {
           ?municipality sf:preferredLanguageLiteral (skos:prefLabel 'fi' '' ?broaderAreaLabel_) .
           FILTER (?munType != <http://ldf.fi/pnr-schema#SubRegion>)
         }
+        OPTIONAL {   ?id ecrm:P131_is_identified_by ?Note.
+          ?Note <http://erlangen-crm.org/current/P2_has_type> <http://vocab.getty.edu/page/aat/300027201> .
+         ?Note ecrm:P129i_is_subject_of ?manifest.
+         ?manifest dcterms:conformsTo "http://iiif.io/api/presentation".
+         }
         BIND(COALESCE(?broaderAreaLabel_, ?missingValue) as ?broaderAreaLabel)
         BIND("PNR" AS ?source)
         BIND("yellow" AS ?markerColor)
