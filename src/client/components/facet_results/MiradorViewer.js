@@ -17,8 +17,8 @@ const styles = () => ({
     height: '100%',
     width: '100%',
     minWidth: 600,
-    maxWidth: 1800,
-    maxHeight: 2000,
+    maxWidth: 1600,
+    maxHeight: 1800,
     padding: '0px !important'
   },
   dialogContent: {
