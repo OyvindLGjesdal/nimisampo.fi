@@ -11,6 +11,15 @@ import {
 export const INITIAL_STATE = {
   query: '',
   datasets: {
+    sognogfjordane: {
+      titleEn: 'Stadnamn Sogn og Fjordane (SOF)',
+      titleFi: 'Stadnamn Sogn og Fjordane (SOF)',
+      shortTitle: 'SOF',
+      timePeriod: '1930-',
+      link: 'https://www.fylkesarkivet.no/stadnamn.380535.no.html',
+      selected: false
+    }
+    ,
     bustadnamn: {
       titleEn: 'Bustadnamnregisteret (BNR)',
       titleFi: 'Bustadnamnregisteret (BNR)',
