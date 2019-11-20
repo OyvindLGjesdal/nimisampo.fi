@@ -1,45 +1,4 @@
-module.exports = {
-  'sognogfjordane': {
-  'title' : 'Stadnamn i Sogn og Fjordane',
-  'shortTitle': 'SOF',
-  'timePeriod': '1930-',
-  'endpoint': 'http://158.39.48.37:3030/stedsnavn-sof-data/query',
-  'simpleSuggestionQuery': `
-  PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
-  PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
-  prEFIX text: <http://jena.apache.org/text#>
-  PREFIX ecrm: <http://erlangen-crm.org/current/>
-  PREFIX spatial: <http://jena.apache.org/spatial#>
-  SELECT distinct ?id
-  WHERE {
-    GRAPH <http://data.stadnamn.uib.no/stedsnavn/bustadnamnregisteret>
-    {  
-      <:> 
-      ?id a ecrm:E53_Place .  
-      }
-    }       
-      `,
-  'resultQuery':  `
-  @prefix farkplacename: <https://ontology.fylkesarkivet.no/placename#>
-  SELECT distinct ?id  ?broaderTypeLabel ?prefLabel ?broaderAreaLabel ?source ?markerColor ?type_uri ?lat ?long 
-  WHERE {
-    GRAPH <http://data.stadnamn.uib.no/stedsnavn/sogn-og-fjordane> {
-      ?id farkplacename:Naturkode ?broaderTypeLabel; 
-      farkplacename:Normform ?prefLabel ;
-      farkplacename:Fylke ?fylke_label ;
-      farkplacename:Kommune ?kommune_label ;
-      farkplacename:Wgs84Epsg4326Latitude ?lat ;
-      farkplacename:Wgs84Epsg4326Longitude ?long .
-      { <QUERY> }
-      BIND (CONCAT(?kommune_label, ", ",?fylke_label) AS ?broaderAreaLabel).
-      BIND ("SOF" AS ?source).
-      BIND ("blue" AS ?markerColor ).
-    }
-    
-    `
-
-  
-  },
+module.exports = {  
   'bustadnamn': {
     'title': 'Bustadnamnregisteret',
     'shortTitle': 'BNR',
@@ -137,6 +96,54 @@ module.exports = {
 
       `,
   },
+  'sognogfjordane': {
+    'title' : 'Stadnamn i Sogn og Fjordane',
+    'shortTitle': 'SOF',
+    'timePeriod': '1930-',
+    'endpoint': 'http://localhost:3030/stedsnavn-sof-data/query',
+    'simpleSuggestionQuery': `
+    PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+    PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+    prEFIX text: <http://jena.apache.org/text#>
+    PREFIX ecrm: <http://erlangen-crm.org/current/>
+    PREFIX spatial: <http://jena.apache.org/spatial#>
+    SELECT distinct ?id
+    WHERE {
+      GRAPH <http://data.stadnamn.uib.no/stedsnavn/bustadnamnregisteret>
+      {  
+        <:> 
+        ?id a ecrm:E53_Place .  
+        }
+      }       
+        `,
+    'resultQuery':  `
+    PREFIX farkplacename: <https://ontology.fylkesarkivet.no/placename#>
+    PREFIX text: <http://jena.apache.org/text#>
+    PREFIX spatial: <http://jena.apache.org/spatial#>
+  
+    PREFIX farkplacename: <https://ontology.fylkesarkivet.no/placename#>
+    PREFIX text: <http://jena.apache.org/text#>
+    PREFIX spatial: <http://jena.apache.org/spatial#>
+    SELECT distinct ?id  ?broaderTypeLabel ?prefLabel ?broaderAreaLabel ?source ?markerColor ?type_uri ?lat ?long 
+      WHERE {   GRAPH <http://data.stadnamn.uib.no/stedsnavn/sogn-og-fjordane> {
+            {       SELECT distinct ?id WHERE { 
+         <QUERY>
+         } }
+         ?id farkplacename:Naturkode ?broaderTypeLabel; 
+         farkplacename:Normform ?prefLabel ;
+         farkplacename:Fylke ?fylke_label ;
+         farkplacename:Kommune ?kommune_label ;
+         farkplacename:Wgs84Epsg4326Latitude ?lat ;
+         farkplacename:Wgs84Epsg4326Longitude ?long . 
+   
+         BIND (CONCAT(?kommune_label, ", ",?fylke_label) AS ?broaderAreaLabel).
+         BIND ("SOF" AS ?source).
+         BIND ("blue" AS ?markerColor ).
+     }}
+      
+      `
+    
+    },
   'pnr': {
     'title': 'Finnish Geographic Names Registry (contemporary)',
     'shortTitle': 'FGN',

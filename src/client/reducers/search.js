@@ -11,6 +11,14 @@ import {
 export const INITIAL_STATE = {
   query: '',
   datasets: {
+       bustadnamn: {
+      titleEn: 'Bustadnamnregisteret (BNR)',
+      titleFi: 'Bustadnamnregisteret (BNR)',
+      shortTitle: 'BNR',
+      timePeriod: '1950-1970',
+      link: 'https://storymaps.arcgis.com/stories/563e56e4d3604a299626c8e3993d2332',
+      selected: true
+    },
     sognogfjordane: {
       titleEn: 'Stadnamn Sogn og Fjordane (SOF)',
       titleFi: 'Stadnamn Sogn og Fjordane (SOF)',
@@ -20,14 +28,6 @@ export const INITIAL_STATE = {
       selected: false
     }
     ,
-    bustadnamn: {
-      titleEn: 'Bustadnamnregisteret (BNR)',
-      titleFi: 'Bustadnamnregisteret (BNR)',
-      shortTitle: 'BNR',
-      timePeriod: '1950-1970',
-      link: 'https://storymaps.arcgis.com/stories/563e56e4d3604a299626c8e3993d2332',
-      selected: true
-    },
     tgn: {
       titleEn: 'The Getty Thesaurus of Geographic Names (TGN)',
       titleFi: 'The Getty Thesaurus of Geographic Names (TGN)',
