@@ -100,7 +100,7 @@ module.exports = {
     'title' : 'Stadnamn i Sogn og Fjordane',
     'shortTitle': 'SOF',
     'timePeriod': '1930-',
-    'endpoint': 'http://localhost:3030/stedsnavn-sof-data/query',
+    'endpoint': 'http://158.39.48.37:3030/stedsnavn-sof-data/query',
     'simpleSuggestionQuery': `
     PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
     PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
