@@ -1,0 +1,15 @@
+staging:
+  image: oyvindlg/gitlab-ci-library:ansible-cgi
+  before_script: 
+  - yum install git openssh-client -y
+  - eval $(ssh-agent -s)
+  - echo "$NODE_WORKER_PRIVATE_KEY" | base64 --decode | ssh-add -
+  - mkdir -p ~/.ssh && chmod 700 ~/.ssh
+  script:
+  - git clone https://gitlab-ci-token:${CI_JOB_TOKEN}@${ANSIBLE_REPO}
+  - cd ansible-stedsnavn
+  - ansible-galaxy install -r requirements.yml  
+  - export ANSIBLE_HOST_KEY_CHECKING=False
+  - ansible-playbook ci_toponymi.spraksamlingane.no.yml -e deploy_env=test -i inventory/hostfile
+  only:
+  - norske-stedsnavn
