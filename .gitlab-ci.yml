@@ -10,6 +10,6 @@ staging:
   - cd ansible-stedsnavn
   - ansible-galaxy install -r requirements.yml
   - export ANSIBLE_HOST_KEY_CHECKING=False
-  - ansible-playbook ci_toponymi.spraksamlingane.no.yml -e deploy_env=test -i inventory/hostfile
+  - ansible-playbook ci_toponymi.spraksamlingane.no.yml -e deploy_env=$DEPLOY_ENV -i inventory/hostfile
   only:
   - norske-stedsnavn
