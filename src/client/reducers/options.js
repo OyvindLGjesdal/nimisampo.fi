@@ -29,6 +29,7 @@ export const INITIAL_STATE = {
       searchByAreaTitle: 'Avgrens kartvisningen til søkeområdet. Sett zoomnivået til minst 11 og bruk søkeknappen nederst.',
       searchByAreaCancel: 'Avbryt',
       searchByAreaSearch: 'Søk',
+      fieldNote: 'Seddel',
       name: 'Navn',
       type: 'Type',
       area: 'Område',

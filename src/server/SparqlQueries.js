@@ -1,9 +1,10 @@
-module.exports = {
+module.exports = {  
   'bustadnamn': {
     'title': 'Bustadnamnregisteret',
     'shortTitle': 'BNR',
     'timePeriod': '1950-54',
     'endpoint': 'http://158.39.48.37:3030/stedsnavn-data/query',
+    
     // 'suggestionQuery': `
     //   PREFIX text: <http://jena.apache.org/text#>
     //   PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
@@ -49,7 +50,7 @@ module.exports = {
     PREFIX wgs84: <http://www.w3.org/2003/01/geo/wgs84_pos#>
     PREFIX spatial: <http://jena.apache.org/spatial#>
         
-    SELECT distinct ?id (?identifier as ?broaderTypeLabel) ?prefLabel ?kommune_uri ?fylke_uri ?broaderAreaLabel ?source ?markerColor ?type_uri ?lat ?long 
+    SELECT distinct ?id (?identifier as ?broaderTypeLabel) ?prefLabel ?kommune_uri ?fylke_uri ?broaderAreaLabel ?source ?markerColor ?type_uri ?lat ?long ?manifest 
     WHERE {
       SERVICE <http://158.39.48.37:3030/stedsnavn-vocab> {
         GRAPH <http://data.stadnamn.uib.no/skos/navneliste> {
@@ -69,11 +70,17 @@ module.exports = {
               FILTER ( NOT EXISTS {?id ecrm:P10_contains ?contains.} )
               }
           }
+          OPTIONAL {   ?id ecrm:P131_is_identified_by ?Note.
+            ?Note <http://erlangen-crm.org/current/P2_has_type> <http://vocab.getty.edu/page/aat/300027201> .
+            ?Note ecrm:P129i_is_subject_of ?manifest.
+            ?manifest dct:conformsTo "http://iiif.io/api/presentation".
+            }
+            
         ?id ecrm:P10_falls_within* ?fylke_uri;
         ecrm:P10_falls_within* ?kommune_uri.
         ?id ecrm:P2_has_type ?type_uri.
         BIND ("BNR" AS ?source)  
-        BIND ("blue" AS  ?markerColor)
+        BIND ("yellow" AS  ?markerColor)
         OPTIONAL {
           ?id wgs84:lat ?lat.
           ?id wgs84:long ?long.
@@ -89,6 +96,54 @@ module.exports = {
 
       `,
   },
+  'sognogfjordane': {
+    'title' : 'Stadnamn i Sogn og Fjordane',
+    'shortTitle': 'SOF',
+    'timePeriod': '1930-',
+    'endpoint': 'http://158.39.48.37:3030/stedsnavn-sof-data/query',
+    'simpleSuggestionQuery': `
+    PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+    PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+    prEFIX text: <http://jena.apache.org/text#>
+    PREFIX ecrm: <http://erlangen-crm.org/current/>
+    PREFIX spatial: <http://jena.apache.org/spatial#>
+    SELECT distinct ?id
+    WHERE {
+      GRAPH <http://data.stadnamn.uib.no/stedsnavn/bustadnamnregisteret>
+      {  
+        <:> 
+        ?id a ecrm:E53_Place .  
+        }
+      }       
+        `,
+    'resultQuery':  `
+    PREFIX farkplacename: <https://ontology.fylkesarkivet.no/placename#>
+    PREFIX text: <http://jena.apache.org/text#>
+    PREFIX spatial: <http://jena.apache.org/spatial#>
+  
+    PREFIX farkplacename: <https://ontology.fylkesarkivet.no/placename#>
+    PREFIX text: <http://jena.apache.org/text#>
+    PREFIX spatial: <http://jena.apache.org/spatial#>
+    SELECT distinct ?id  ?broaderTypeLabel ?prefLabel ?broaderAreaLabel ?source ?markerColor ?type_uri ?lat ?long 
+      WHERE {   GRAPH <http://data.stadnamn.uib.no/stedsnavn/sogn-og-fjordane> {
+            {       SELECT distinct ?id WHERE { 
+         <QUERY>
+         } }
+         ?id farkplacename:Naturkode ?broaderTypeLabel; 
+         farkplacename:Normform ?prefLabel ;
+         farkplacename:Fylke ?fylke_label ;
+         farkplacename:Kommune ?kommune_label ;
+         farkplacename:Wgs84Epsg4326Latitude ?lat ;
+         farkplacename:Wgs84Epsg4326Longitude ?long . 
+   
+         BIND (CONCAT(?kommune_label, ", ",?fylke_label) AS ?broaderAreaLabel).
+         BIND ("SOF" AS ?source).
+         BIND ("blue" AS ?markerColor ).
+     }}
+      
+      `
+    
+    },
   'pnr': {
     'title': 'Finnish Geographic Names Registry (contemporary)',
     'shortTitle': 'FGN',
@@ -119,7 +174,7 @@ module.exports = {
       PREFIX sf: <http://ldf.fi/functions#>
       PREFIX wgs84: <http://www.w3.org/2003/01/geo/wgs84_pos#>
       PREFIX crm: <http://www.cidoc-crm.org/cidoc-crm/>
-      SELECT ?id ?prefLabel ?broaderTypeLabel ?broaderAreaLabel ?source ?lat ?long ?markerColor
+      SELECT ?id ?prefLabel ?broaderTypeLabel ?broaderAreaLabel ?source ?lat ?long ?markerColor ?manifest
       WHERE {
         <QUERY>
         ?id sf:preferredLanguageLiteral (skos:prefLabel 'fi' '' ?prefLabel) .
@@ -132,7 +187,7 @@ module.exports = {
           ?municipality a ?munType .
           ?municipality sf:preferredLanguageLiteral (skos:prefLabel 'fi' '' ?broaderAreaLabel_) .
           FILTER (?munType != <http://ldf.fi/pnr-schema#SubRegion>)
-        }
+        }      
         BIND(COALESCE(?broaderAreaLabel_, ?missingValue) as ?broaderAreaLabel)
         BIND("PNR" AS ?source)
         BIND("yellow" AS ?markerColor)
