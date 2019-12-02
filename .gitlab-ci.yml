@@ -8,7 +8,7 @@ staging:
   script:
   - git clone https://gitlab-ci-token:${CI_JOB_TOKEN}@${ANSIBLE_REPO}
   - cd ansible-stedsnavn
-  - ansible-galaxy install -r requirements.yml  
+  - ansible-galaxy install -r requirements.yml
   - export ANSIBLE_HOST_KEY_CHECKING=False
   - ansible-playbook ci_toponymi.spraksamlingane.no.yml -e deploy_env=test -i inventory/hostfile
   only:
