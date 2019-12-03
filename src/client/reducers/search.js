@@ -57,7 +57,7 @@ export const INITIAL_STATE = {
   sortBy: 'broaderAreaLabel',
   sortDirection: 'asc',
   groupBy: 'broaderTypeLabel',
-  groupByLabel: 'Paikanlaji',
+  groupByLabel: 'Lokalitetstype',
   textResultsFetching: false,
   spatialResultsFetching: false,
 };
