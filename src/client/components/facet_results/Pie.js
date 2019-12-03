@@ -83,7 +83,7 @@ let Pie = (props) => {
   dataArray = _.orderBy(dataArray, 'y', 'desc');
   dataArray = combineSmallGroups(dataArray);
   const legendArray = dataArray.map(group => ({ name: group.x.toLowerCase() + ' (' + group.y + ')' }));
-  const legendHeigth = legendArray.length * 35;
+  const legendHeigth = legendArray.length * 38;
   // const pieTitle = resultCount + ' results for the query "' + query + '"';
   // <VictoryLabel
   //   style={{
