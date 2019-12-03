@@ -3,7 +3,7 @@ module.exports = {
     'title': 'Bustadnamnregisteret',
     'shortTitle': 'BNR',
     'timePeriod': '1950-54',
-    'endpoint': 'http://158.39.48.37:3030/stedsnavn-data/query',
+    'endpoint': 'http://158.39.48.37/stedsnavn-data/query',
     
     // 'suggestionQuery': `
     //   PREFIX text: <http://jena.apache.org/text#>
@@ -52,7 +52,7 @@ module.exports = {
         
     SELECT distinct ?id (?identifier as ?broaderTypeLabel) ?prefLabel ?kommune_uri ?fylke_uri ?broaderAreaLabel ?source ?markerColor ?type_uri ?lat ?long ?manifest 
     WHERE {
-      SERVICE <http://158.39.48.37:3030/stedsnavn-vocab> {
+      SERVICE <http://158.39.48.37/stedsnavn-vocab> {
         GRAPH <http://data.stadnamn.uib.no/skos/navneliste> {
           ?type_uri dct:identifier ?identifier.
           VALUES (?identifier) {("bruk") ("gard")}.
@@ -100,7 +100,7 @@ module.exports = {
     'title' : 'Stadnamn i Sogn og Fjordane',
     'shortTitle': 'SOF',
     'timePeriod': '1930-',
-    'endpoint': 'http://158.39.48.37:3030/stedsnavn-sof-data/query',
+    'endpoint': 'http://158.39.48.37/stedsnavn-sof-data/query',
     'simpleSuggestionQuery': `
     PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
     PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
