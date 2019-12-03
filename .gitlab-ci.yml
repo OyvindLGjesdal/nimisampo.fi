@@ -1,7 +1,6 @@
 staging:
   image: oyvindlg/gitlab-ci-library:ansible-cgi
   before_script: 
-  - yum install git -y
   - eval $(ssh-agent -s)
   - echo "$NODE_WORKER_PRIVATE_KEY" | base64 --decode | ssh-add -
   - mkdir -p ~/.ssh && chmod 700 ~/.ssh
